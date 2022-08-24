@@ -33,5 +33,4 @@ viz_correlation = sns.heatmap(df_weather.corr(),
 
 st.pyplot(viz_correlation.figure)
 import plotly.express as px
-import plotly.graph_objects as go
 st.plotly_chart(viz_correlation.figure)
