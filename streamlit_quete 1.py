@@ -25,9 +25,6 @@ plt.xlabel("cylinders'by continent")
 plt.ylabel("quantity")
 st.pyplot(fig_nbcyl, clear_figure=True)
 st.caption("On constate que les plus gros cylindrées se trouvent aux USA, suivis du Japon, et enfin de l'Europe.")
-options= st.multiselect("Choisis la région qui t'intéresse",
-     	['Europe.', 'Japon.', 'US.'])
-st.write('Tu as choisis:', options)
 st.title("2. Répartition du nombre de cylindres par région et par année")
 fig_nbcyl_année=plt.figure(figsize=(12, 15)) 
 df_cars.groupby(["continent", "year"])["cylinders"].value_counts()
@@ -51,3 +48,12 @@ plt.xlabel("Year")
 plt.ylabel("mpg")
 plt.title("mpg's evolution by year") 
 st.pyplot(fig_mpg, clear_figure=True)  
+st.title('II. Affichage du dataframe selon la région')
+regions = df_cars["continent"].unique()
+option_regions= st.multiselect("Choisis la région qui t'intéresse",
+      	regions, default = regions)
+# # Selection de ou des regions choisies, en filtrant avec un masque :
+mask_region = df_cars["continent"].isin(option_regions)
+df_cars=df_cars[mask_region]
+st.write(df_cars)
+
